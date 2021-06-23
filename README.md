@@ -1,42 +1,4 @@
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
-
-	- [JNI知识点](#jni知识点)
-		- [动态注册 vs 静态注册](#动态注册-vs-静态注册)
-			- [静态注册](#静态注册)
-			- [动态注册](#动态注册)
-		- [JavaVM vs JNIEnv](#javavm-vs-jnienv)
-		- [JNI中多线程回调到Java层如何实现](#jni中多线程回调到java层如何实现)
-		- [局部引用 vs 全局引用](#局部引用-vs-全局引用)
-			- [局部引用](#局部引用)
-			- [全局引用](#全局引用)
-			- [弱全局引用](#弱全局引用)
-	- [MediaCodec知识点](#mediacodec知识点)
-		- [MediaCodec同步 vs 异步](#mediacodec同步-vs-异步)
-		- [MediaCodec工作原理](#mediacodec工作原理)
-		- [MediaCodec解码导致绿边问题](#mediacodec解码导致绿边问题)
-		- [MediaCodec如何提升清晰度](#mediacodec如何提升清晰度)
-	- [音视频基础知识点](#音视频基础知识点)
-		- [H264编码流程](#h264编码流程)
-			- [H264压缩技巧](#h264压缩技巧)
-			- [H264压缩过程](#h264压缩过程)
-		- [H264 vs H265](#h264-vs-h265)
-		- [FLV格式介绍](#flv格式介绍)
-		- [TS格式介绍](#ts格式介绍)
-		- [MP4格式介绍](#mp4格式介绍)
-		- [HLS格式介绍](#hls格式介绍)
-		- [DASH格式介绍](#dash格式介绍)
-		- [RTMP协议分析](#rtmp协议分析)
-	- [Android基础知识](#android基础知识)
-		- [Dalvik vs ART](#dalvik-vs-art)
-		- [GC Root有哪些](#gc-root有哪些)
-	- [播放器知识点](#播放器知识点)
-		- [播放器架构分析](#播放器架构分析)
-		- [播放器成功率优化](#播放器成功率优化)
-		- [播放器首帧速度优化](#播放器首帧速度优化)
-		- [播放器卡顿优化](#播放器卡顿优化)
-	- [FFmpeg知识点](#ffmpeg知识点)
-
-<!-- /TOC -->## JNI知识点
+## JNI知识点
 ### 动态注册 vs 静态注册
 执行一个java的native方法，要想让虚拟机知道调用so库中的哪一个方法，需要知道native方法和so库中对应的函数映射表，如何将native方法和so库中函数映射起来，就用到了注册的概念。
 注册分为动态注册和静态注册，默认情况下是静态注册，我们不需要管。
