@@ -22,6 +22,7 @@ MediaCodec可以处理三种数据:
 
 
 ![MediaCodec工作流程](./mediacodec_work.jpg)
+
 MediaCodec存在三种状态:
 > * 停止状态: 停止的状态有三种可能, 未初始化/已配置/错误
 > * 执行状态: 执行状态也有三种可能, Flushed/Running/Stream-of-Stream
