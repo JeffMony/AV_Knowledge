@@ -1,58 +1,58 @@
-- [JNI知识点](#jni---)
-  * [动态注册 vs 静态注册](#-----vs-----)
-    + [静态注册](#----)
-    + [动态注册](#----)
-  * [JavaVM vs JNIEnv](#javavm-vs-jnienv)
-  * [JNI中多线程回调到Java层如何实现](#jni-------java-----)
-  * [局部引用 vs 全局引用](#-----vs-----)
-    + [局部引用](#----)
-    + [全局引用](#----)
-    + [弱全局引用](#-----)
-- [MediaCodec知识点](#mediacodec---)
-  * [MediaCodec同步 vs 异步](#mediacodec---vs---)
-  * [MediaCodec工作原理](#mediacodec----)
-  * [MediaCodec解码导致绿边问题](#mediacodec--------)
-  * [MediaCodec如何提升清晰度](#mediacodec-------)
-- [音视频基础知识点](#--------)
-  * [H264编码流程](#h264----)
-    + [H264压缩技巧](#h264----)
-    + [H264压缩过程](#h264----)
-  * [H264 vs H265](#h264-vs-h265)
-  * [SPS vs PPS](#sps-vs-pps)
-  * [FLV格式介绍](#flv----)
-  * [TS格式介绍](#ts----)
-  * [MP4格式介绍](#mp4----)
-  * [HLS格式介绍](#hls----)
-  * [DASH格式介绍](#dash----)
-  * [RTMP协议分析](#rtmp----)
-    + [RTMP协议介绍](#rtmp----)
-    + [RTMP为什么还要建连](#rtmp-------)
-    + [RTMP建连流程](#rtmp----)
-- [Android基础知识](#android----)
-  * [Dalvik vs ART](#dalvik-vs-art)
-  * [GC Root有哪些](#gc-root---)
-  * [SurfaceView vs TextureView](#surfaceview-vs-textureview)
-- [播放器知识点](#------)
-  * [播放器架构分析](#-------)
-  * [播放器成功率优化](#--------)
-  * [播放器首帧速度优化](#---------)
-  * [播放器卡顿优化](#-------)
-  * [使用MediaExtractor和MediaCodec播放视频](#--mediaextractor-mediacodec----)
-  * [ffplay完整执行流程](#ffplay------)
-- [FFmpeg知识点](#ffmpeg---)
-- [Camera知识点](#camera---)
-  * [Camera vs Camera2](#camera-vs-camera2)
-- [音视频合成问题](#-------)
-  * [如何将两个视频拼接为一个视频](#--------------)
-  * [如何将两个音频拼接为一个音频](#--------------)
-  * [MediaExtractor如何做精确seek](#mediaextractor-----seek)
-- [C++知识点](#c-----)
-  * [智能指针](#----)
-  * [lamba表达式](#lamba---)
-  * [vector底层扩容原理](#vector------)
+  - [JNI知识点](#jni知识点)
+    - [动态注册和静态注册](#动态注册和静态注册)
+      - [静态注册](#静态注册)
+      - [动态注册](#动态注册)
+    - [JavaVM和JNIEnv](#javavm和jnienv)
+    - [JNI中多线程回调到Java层如何实现](#jni中多线程回调到java层如何实现)
+    - [局部引用和全局引用](#局部引用和全局引用)
+      - [局部引用](#局部引用)
+      - [全局引用](#全局引用)
+      - [弱全局引用](#弱全局引用)
+  - [MediaCodec知识点](#mediacodec知识点)
+    - [MediaCodec同步 vs 异步](#mediacodec同步-vs-异步)
+    - [MediaCodec工作原理](#mediacodec工作原理)
+    - [MediaCodec解码导致绿边问题](#mediacodec解码导致绿边问题)
+    - [MediaCodec如何提升清晰度](#mediacodec如何提升清晰度)
+  - [音视频基础知识点](#音视频基础知识点)
+    - [H264编码流程](#h264编码流程)
+      - [H264压缩技巧](#h264压缩技巧)
+      - [H264压缩过程](#h264压缩过程)
+    - [H264和H265](#h264和h265)
+    - [SPS和PPS](#sps和pps)
+    - [FLV格式介绍](#flv格式介绍)
+    - [TS格式介绍](#ts格式介绍)
+    - [MP4格式介绍](#mp4格式介绍)
+    - [HLS格式介绍](#hls格式介绍)
+    - [DASH格式介绍](#dash格式介绍)
+    - [RTMP协议分析](#rtmp协议分析)
+      - [RTMP协议介绍](#rtmp协议介绍)
+      - [RTMP为什么还要建连](#rtmp为什么还要建连)
+      - [RTMP建连流程](#rtmp建连流程)
+  - [Android基础知识](#android基础知识)
+    - [Dalvik和ART](#dalvik和art)
+    - [GC-Root有哪些](#gc-root有哪些)
+    - [SurfaceView和TextureView](#surfaceview和textureview)
+  - [播放器知识点](#播放器知识点)
+    - [播放器架构分析](#播放器架构分析)
+    - [播放器成功率优化](#播放器成功率优化)
+    - [播放器首帧速度优化](#播放器首帧速度优化)
+    - [播放器卡顿优化](#播放器卡顿优化)
+    - [使用MediaExtractor和MediaCodec播放视频](#使用mediaextractor和mediacodec播放视频)
+    - [ffplay完整执行流程](#ffplay完整执行流程)
+  - [FFmpeg知识点](#ffmpeg知识点)
+  - [Camera知识点](#camera知识点)
+    - [Camera和Camera2](#camera和camera2)
+  - [音视频合成问题](#音视频合成问题)
+    - [如何将两个视频拼接为一个视频](#如何将两个视频拼接为一个视频)
+    - [如何将两个音频拼接为一个音频](#如何将两个音频拼接为一个音频)
+    - [MediaExtractor如何做精确seek](#mediaextractor如何做精确seek)
+  - [C++知识点](#c知识点)
+    - [智能指针](#智能指针)
+    - [lamba表达式](#lamba表达式)
+    - [vector底层扩容原理](#vector底层扩容原理)
 
 ## JNI知识点
-### 动态注册 vs 静态注册
+### 动态注册和静态注册
 执行一个java的native方法，要想让虚拟机知道调用so库中的哪一个方法，需要知道native方法和so库中对应的函数映射表，如何将native方法和so库中函数映射起来，就用到了注册的概念。
 注册分为动态注册和静态注册，默认情况下是静态注册，我们不需要管。
 #### 静态注册
@@ -70,7 +70,7 @@
 动态注册，顾名思义，就是在运行过程中通过调用RegisterNatives方法手动实现native方法和so中方法的绑定，虚拟机可以通过函数映射表直接找到对应的方法。
 实现动态注册的地方是JNI_OnLoad方法，这是so加载的入口。如果动态注册成功返回JNI_OK，失败则返回一个负的值。
 
-### JavaVM vs JNIEnv
+### JavaVM和JNIEnv
 JavaVM 代表java的虚拟机，Android中一个进程只有一个JavaVM，我们so加载的入口就是JNI_OnLoad(JavaVM* jvm, void* reverved)
 
 JNIEnv是提供JNI Native函数的基础环境，不同的线程的JNIEnv相互独立的。
@@ -79,7 +79,7 @@ JNIEnv是提供JNI Native函数的基础环境，不同的线程的JNIEnv相互�
 ### JNI中多线程回调到Java层如何实现
 从上面的分析已经得知JavaVM是进程相关的，JNIEnv是线程相关的，可以通过JavaVM->AttachCurrentThread获取子线程的JNIEnv引用，在调用结束之后，通过JavaVM->DetachCurrentThread()解除挂在当前的线程。
 
-### 局部引用 vs 全局引用
+### 局部引用和全局引用
 #### 局部引用
 通过NewLocalRef和各种JNI接口创建，例如可以通过FindClass/NewObject/GetObjectClass等JNI接口创建，不能再本地函数中跨函数调用，也不能跨线程使用，函数返回中局部引用的对象会被JVM自动释放，也可以调用DeleteLocalRef释放。
 
@@ -119,7 +119,7 @@ H264压缩技术主要采用了以下几种方法对视频数据进行压缩：
 > * 对残差数据做DCT
 > * CABAC，属于无损压缩技术
 
-### H264 vs H265
+### H264和H265
 H265仍然采用混合编解码，编解码结构与H264基本一致。
 主要提升在于：
 > * 编码块划分结构：采用CU/PU/TU的递归结构
@@ -127,7 +127,7 @@ H265仍然采用混合编解码，编解码结构与H264基本一致。
 > * 滤波器：在区块滤波之后增加了SAO滤波模块
 > * H265优化了实现细节，对高清视频的处理更加精细
 
-### SPS vs PPS
+### SPS和PPS
 
 ### FLV格式介绍
 Flv格式的视频由Flv Header和Flv Body组成，Flv Body由一个一个Tag组成，每个Tag都有一个preTagSize字段，标记着前面一个Tag的大小。
@@ -165,9 +165,9 @@ RTMP拉流流程:
 > * 播放---> Play
 
 ## Android基础知识
-### Dalvik vs ART
-### GC Root有哪些
-### SurfaceView vs TextureView
+### Dalvik和ART
+### GC-Root有哪些
+### SurfaceView和TextureView
 ## 播放器知识点
 ### 播放器架构分析
 ### 播放器成功率优化
@@ -177,7 +177,7 @@ RTMP拉流流程:
 ### ffplay完整执行流程
 ## FFmpeg知识点
 ## Camera知识点
-### Camera vs Camera2
+### Camera和Camera2
 ## 音视频合成问题
 ### 如何将两个视频拼接为一个视频
 ### 如何将两个音频拼接为一个音频
