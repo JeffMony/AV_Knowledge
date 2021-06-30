@@ -1,5 +1,5 @@
 
 ## Android知识点
-### Dalvik和ART
+### Dalvik vs ART
 ### GC-Root有哪些
-### SurfaceView和TextureView
+### SurfaceView vs TextureView
