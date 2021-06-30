@@ -7,10 +7,13 @@
       - [码率控制模式--->bitrate-mode](#码率控制模式---bitrate-mode)
       - [编码档位--->profile](#编码档位---profile)
     - [使用MediaExtractor和MediaCodec播放视频](#使用mediaextractor和mediacodec播放视频)
+    - [软解码 vs 软解码](#软解码-vs-软解码)
 
 ## MediaCodec知识点
 ### MediaCodec工作原理
 MediaCodec是Android系统提供的原生编解码器,是标准的硬解码,在Android系统如果需要对音视频进行编解码操作的情况下,都会使用MediaCodec进行操作,因为硬解码效率比软解码要高很多.
+
+MediaCodec 类可以访问底层多媒体编解码器框架(StageFright或者OpenMAX)，即编解码组件，与MediaSync、MediaMuxer、MediaCrypto、MediaDrm、Image、Surface和AudioTrack一起使用，通过调用底层获得了编解码能力。
 ![MediaCodec工作原理](./mediacodec_base.png)
 
 MediaCodec可以处理三种数据:
@@ -183,3 +186,12 @@ bitrate-mode有四种模式
 MediaExtractor 是 Android系统提供的解析视频信息的类,主要用于解析视频的封装格式,解析出具体的track stream,用MediaExtractor和MediaCodec结合是可以正常的实现播放器的功能的.
 具体的可以参考:
 [MediaExtractor和MediaCodec结合播放视频](https://www.jianshu.com/p/d406314ab63c)
+
+### 软解码 vs 软解码
+硬解码：一般情况下，Android4.4以上版本推荐使用硬解码，低于Android4.4版本使用软解码
+软解码：主要使用CPU的大量运算来解码，功耗可能会比较大，但是细节表现比硬解码好，兼容性也比较好。
+
+||优点|缺点|
+|:-|:-|:-|
+|软解码|1.兼容性强，出错情况少；<br>2.软解码色彩一般比硬解码更加柔和；<br>3.编码的可操作空间大，自由度高|1.CPU消耗大；<br>2.机器容易发热；<br>3.功耗高|
+|硬解码|功耗低，执行效率高|1.兼容性差，兼容工作非常繁杂；<br>2.可控性差，依赖底层编解码实现|
