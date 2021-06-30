@@ -10,7 +10,7 @@
 |网络协议分析|[网络协议分析](./network/传输协议分析.md)|
 |Android面试题|[Android知识点](./android/Android知识点.md)|
 |播放器面试题|[播放器知识点](./player/播放器知识点.md)|
-|FFmpeg面试题||
+|FFmpeg面试题|[FFmpeg知识点](./ffmpeg/FFmpeg知识点.md)|
 |Camera知识点|[Camera知识点](./camera/Camera知识点.md)|
 |音视频编辑问题|[音视频编辑问题](./edit/音视频编辑.md)|
 |C++知识点|[C++知识点](./cpp/C++知识点.md)|
