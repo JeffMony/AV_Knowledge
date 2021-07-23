@@ -14,6 +14,7 @@
 |Camera知识点|[Camera知识点](./camera/Camera知识点.md)|
 |音视频编辑问题|[音视频编辑问题](./edit/音视频编辑.md)|
 |C++知识点|[C++知识点](./cpp/C++知识点.md)|
+|OpenGL知识点|[OpenGL知识点](./opengl/openGL知识点.md)|
 
 ***
 
