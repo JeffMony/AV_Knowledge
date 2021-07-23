@@ -346,5 +346,5 @@ GLSurfaceView内部拥有三个比较重要的变量：
 > * 添加设置Surface和EGLContext的方法
 > * 提供和系统GLSurfaceView相同的回调方法
 
-![GLSurfaceView持有流程](./GLSurfaceView流程图.png)
+![GLSurfaceView持有流程](./GLSurfaceView流程图.png)<br>
 自定义GLSurfaceView的核心代码: 欢迎参考[https://github.com/JeffMony/OpenGLDemo](https://github.com/JeffMony/OpenGLDemo)

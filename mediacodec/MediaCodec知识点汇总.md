@@ -1,16 +1,16 @@
   - [MediaCodec知识点](#mediacodec知识点)
-    - [MediaCodec工作原理](#mediacodec工作原理)
-    - [MediaCodec同步 vs 异步](#mediacodec同步-vs-异步)
-    - [MediaCodec解码导致绿边问题](#mediacodec解码导致绿边问题)
-    - [MediaCodec如何提升清晰度](#mediacodec如何提升清晰度)
-      - [码率--->bitrate](#码率---bitrate)
-      - [码率控制模式--->bitrate-mode](#码率控制模式---bitrate-mode)
-      - [编码档位--->profile](#编码档位---profile)
-    - [使用MediaExtractor和MediaCodec播放视频](#使用mediaextractor和mediacodec播放视频)
-    - [软解码 vs 软解码](#软解码-vs-软解码)
+    - [1.MediaCodec工作原理](#1mediacodec工作原理)
+    - [2.MediaCodec同步 vs 异步](#2mediacodec同步-vs-异步)
+    - [3.MediaCodec解码导致绿边问题](#3mediacodec解码导致绿边问题)
+    - [4.MediaCodec如何提升清晰度](#4mediacodec如何提升清晰度)
+      - [4.1 码率--->bitrate](#41-码率---bitrate)
+      - [4.2 码率控制模式--->bitrate-mode](#42-码率控制模式---bitrate-mode)
+      - [4.3 编码档位--->profile](#43-编码档位---profile)
+    - [5.使用MediaExtractor和MediaCodec播放视频](#5使用mediaextractor和mediacodec播放视频)
+    - [6.软解码 vs 软解码](#6软解码-vs-软解码)
 
 ## MediaCodec知识点
-### MediaCodec工作原理
+### 1.MediaCodec工作原理
 MediaCodec是Android系统提供的原生编解码器,是标准的硬解码,在Android系统如果需要对音视频进行编解码操作的情况下,都会使用MediaCodec进行操作,因为硬解码效率比软解码要高很多.
 
 MediaCodec 类可以访问底层多媒体编解码器框架(StageFright或者OpenMAX)，即编解码组件，与MediaSync、MediaMuxer、MediaCrypto、MediaDrm、Image、Surface和AudioTrack一起使用，通过调用底层获得了编解码能力。
@@ -42,7 +42,9 @@ MediaCodec存在三种状态:
 注意:
 > * codec也会遇到错误,录入queue中的无效返回值或者传递数据异常,可以调用reset重置codec状态,让codec再次正常使用.
 
-### MediaCodec同步 vs 异步
+****
+
+### 2.MediaCodec同步 vs 异步
 MediaCodec的数据处理存在同步和异步两种形式,每个编解码器维护一组输入和输出缓冲区，这些输入和输出缓冲区由API调用中的缓冲区ID引用。成功调用start（）后，客户端“不拥有”输入缓冲区或输出缓冲区。在同步模式下，调用dequeueInput / OutputBuffer（…）从编解码器获取（或拥有）输入或输出缓冲区。在异步模式下，您将通过Callback＃onInputBufferAvailable / Callback＃onOutputBufferAvailable回调自动接收可用缓冲区。
 
 MediaCodec异步模式下使用方式:
@@ -123,7 +125,9 @@ MediaCodec codec = MediaCodec.createByCodecName(name);
 
 ```
 
-### MediaCodec解码导致绿边问题
+****
+
+### 3.MediaCodec解码导致绿边问题
 MediaCodec解码H264数据之后可能会存在数据对齐的问题,数据对齐问题会导致一些异常的表现.
 已知MediaCodec使用GPU进行解码,解码后的数据有一个对齐规则,不同的设备表现不一致,有些是15位对齐,或者32位/64位/128位对齐,当然有时候宽高的对齐方式不同.
 假设需要解码的图像的宽高是15 * 15,在使用16位对齐的设备进行硬解码后,输出的YUV数据会是16 * 16, 多出来的宽高会被自动填充.
@@ -157,12 +161,14 @@ private static void yuvCopy(byte[] src, int offset, int inWidth, int inHeight, b
 }
 ```
 
-### MediaCodec如何提升清晰度
+****
+
+### 4.MediaCodec如何提升清晰度
 使用MediaCodec进行编码的时候,有些参数会影响编码视频的清晰度的,接下来我们谈谈这些参数怎么影响视频清晰度的.
 
-#### 码率--->bitrate
+#### 4.1 码率--->bitrate
 正常情况下,码率越高的情况下,视频越清晰,但是MediaCodec的码率都是与上限的,这方面要做好预判,可以通过MediaCodecInfo.VideoCapabilities来获取视频的最大码率.
-#### 码率控制模式--->bitrate-mode
+#### 4.2 码率控制模式--->bitrate-mode
 bitrate-mode有四种模式
 > * BITRATE_MODE_CBR
 表示恒定码率,编码器会将输出的码率控制设置位恒定的码率值,这种模式码率相对稳定可控,方便进行检测/丢包控制等后续操作,适合网络流媒体传输
@@ -173,7 +179,7 @@ bitrate-mode有四种模式
 > * BITRATE_MODE_VBR
 该模式会根据视频采集内容的复杂度动态调整输出码率,图像复杂时码率会很高,图像简单码率会比较低,总而言之码率波动会非常大,容易出现马赛克等情况.
 
-#### 编码档位--->profile
+#### 4.3 编码档位--->profile
 具体的codec profile可以参考MediaCodecInfo.CodecProfileLevel,里面有针对各种编码的profile level
 > * AVCProfileBaseline
 > * AVCProfileMain
@@ -182,12 +188,16 @@ bitrate-mode有四种模式
 选择不同的profile对应的清晰度也不同的,profile是对视频压缩特性的描述,profile越高,说明采用了越高级的压缩特性,相应的同样配置下编码得到的视频文件的清晰度就越高,并且码率越小.
 比较保险的方式,就是主流机型都支持的方式,可以设置profile位MainProfile
 
-### 使用MediaExtractor和MediaCodec播放视频
+****
+
+### 5.使用MediaExtractor和MediaCodec播放视频
 MediaExtractor 是 Android系统提供的解析视频信息的类,主要用于解析视频的封装格式,解析出具体的track stream,用MediaExtractor和MediaCodec结合是可以正常的实现播放器的功能的.
 具体的可以参考:
 [MediaExtractor和MediaCodec结合播放视频](https://www.jianshu.com/p/d406314ab63c)
 
-### 软解码 vs 软解码
+****
+
+### 6.软解码 vs 软解码
 硬解码：一般情况下，Android4.4以上版本推荐使用硬解码，低于Android4.4版本使用软解码
 软解码：主要使用CPU的大量运算来解码，功耗可能会比较大，但是细节表现比硬解码好，兼容性也比较好。
 
