@@ -15,6 +15,7 @@
 |音视频编辑问题|[音视频编辑问题](./edit/音视频编辑.md)|
 |C++知识点|[C++知识点](./cpp/C++知识点.md)|
 |OpenGL知识点|[OpenGL知识点](./opengl/openGL知识点.md)|
+|OpenGL拓展知识|[OpenGL拓展知识点](./opengl/openGL拓展知识点.md)|
 
 ***
 

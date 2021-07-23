@@ -1,3 +1,4 @@
+  - [OpenGL知识点](#opengl知识点)
     - [1.OpenGL中重要的概念](#1opengl中重要的概念)
       - [1.1 两种坐标系](#11-两种坐标系)
       - [1.2 绘制的图形](#12-绘制的图形)
@@ -12,8 +13,9 @@
       - [2.5 opengl es绘制纹理的过程](#25-opengl-es绘制纹理的过程)
       - [2.6 共享上下文实现共享绘制](#26-共享上下文实现共享绘制)
     - [3.自定义GLSurfaceView](#3自定义glsurfaceview)
-      - [3.1 自定义GLSurfaceView的流程](#31-自定义glsurfaceview的流程
+      - [3.1 自定义GLSurfaceView的流程](#31-自定义glsurfaceview的流程)
 
+## OpenGL知识点
 ### 1.OpenGL中重要的概念
 #### 1.1 两种坐标系
 > * 顶点坐标系
