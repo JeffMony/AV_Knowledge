@@ -1,8 +1,18 @@
-### Dalvik vs ART
+## Android知识点
+### 1.Dalvik vs ART
+#### 1.1 Dalvik
+#### 1.2 ART
+
 ****
-### GC-Root有哪些
+
+### 2.GC-Root有哪些
+
 ****
-### SurfaceView vs TextureView
+
+### 3.SurfaceView vs TextureView
+#### 3.1 SurfaceView
+#### 3.2 TextureView
+
 ****
-### GLSurfaceView源码分析
-****
+
+### 4.GLSurfaceView源码分析
