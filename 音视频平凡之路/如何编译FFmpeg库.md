@@ -534,6 +534,120 @@ typedef struct AVPacket {
 
 
 ## 3.FFmpeg编译选项
+FFmpeg的编译裁剪是非常重要的，它要求我们必须知道应该支持什么特性，不支持什么特性，那首先需要搞清楚，FFmpeg可以支持什么特性，查询FFmpeg是否支持这个特性是很重要的。下载了FFmpeg源码之后，在源码目录下有一个configure文件，这个文件非常庞大，里面包含了FFmpeg所有特性的配置选项。<br>
+- ./configure --help
+```
+  --help                   print this message
+  --quiet                  Suppress showing informative output
+  --list-decoders          show all available decoders
+  --list-encoders          show all available encoders
+  --list-hwaccels          show all available hardware accelerators
+  --list-demuxers          show all available demuxers
+  --list-muxers            show all available muxers
+  --list-parsers           show all available parsers
+  --list-protocols         show all available protocols
+  --list-bsfs              show all available bitstream filters
+  --list-indevs            show all available input devices
+  --list-outdevs           show all available output devices
+  --list-filters           show all available filters
+```
+
+- 支持哪些解码选项        ./configure --list-decoders
+想支持这个解码，需要使用--enable-decoder=XXX；<br>
+不想支持这个解码，需要使用--disable-decoder=XXX<br>
+- 支持哪些编码选项        ./configure --list-encoders
+想支持这个编码，使用--enable-encoder=XXX；<br>
+不想支持这个编码，使用--disable-encoder=XXX<br>
+- 支持哪些硬件编解码选项   ./configure --list-hwaccels
+```
+h263_vaapi       hevc_dxva2       mpeg2_d3d11va        mpeg4_videotoolbox       vp9_dxva2
+h263_videotoolbox    hevc_nvdec       mpeg2_d3d11va2       vc1_d3d11va          vp9_nvdec
+h264_d3d11va         hevc_vaapi       mpeg2_dxva2          vc1_d3d11va2         vp9_vaapi
+h264_d3d11va2        hevc_vdpau       mpeg2_nvdec          vc1_dxva2            wmv3_d3d11va
+h264_dxva2       hevc_videotoolbox    mpeg2_vaapi          vc1_nvdec            wmv3_d3d11va2
+h264_nvdec       mjpeg_nvdec          mpeg2_vdpau          vc1_vaapi            wmv3_dxva2
+h264_vaapi       mjpeg_vaapi          mpeg2_videotoolbox       vc1_vdpau            wmv3_nvdec
+h264_vdpau       mpeg1_nvdec          mpeg2_xvmc           vp8_nvdec            wmv3_vaapi
+h264_videotoolbox    mpeg1_vdpau          mpeg4_nvdec          vp8_vaapi            wmv3_vdpau
+hevc_d3d11va         mpeg1_videotoolbox   mpeg4_vaapi          vp9_d3d11va
+hevc_d3d11va2        mpeg1_xvmc       mpeg4_vdpau          vp9_d3d11va2
+
+```
+上面列出的都是可以外接的硬件编解码模块。
+
+- 支持哪些解封装选项      ./configure --list-demuxers
+想支持这个解封装，使用--enable-demuxer=XXX；<br>
+不想支持这个解封装，使用--disable-demuxer=XXX<br>
+- 支持哪些封装选项        ./configure --list-muxers
+想支持这个封装，使用--enable-muxer=XXX；<br>
+不想支持这个封装，使用--disable-muxer=XXX<br>
+- 支持哪些parser选项     ./configure --list-parsers
+```
+aac          dnxhd            h261             opus             vorbis
+aac_latm         dpx              h263             png              vp3
+ac3          dvaudio          h264             pnm              vp8
+adx          dvbsub           hevc             rv30             vp9
+bmp          dvd_nav          mjpeg            rv40             xma
+cavsvideo        dvdsub           mlp              sbc
+cook             flac             mpeg4video           sipr
+dca          g729             mpegaudio        tak
+dirac            gsm              mpegvideo        vc1
+
+```
+想支持这个parser选项，使用--enable-parser=XXX；<br>
+不想支持这个parser选项，使用--disable-parser=XXX<br>
+- 支持哪些协议           ./configure --list-protocols
+```
+async            ftp              librtmps         pipe             sctp
+bluray           gopher           librtmpt         prompeg          srtp
+cache            hls              librtmpte        rtmp             subfile
+concat           http             libsmbclient         rtmpe            tcp
+crypto           httpproxy        libsrt           rtmps            tee
+data             https            libssh           rtmpt            tls
+ffrtmpcrypt      icecast          md5              rtmpte           udp
+ffrtmphttp       librtmp          mmsh             rtmpts           udplite
+file             librtmpe         mmst             rtp              unix
+```
+想支持这个协议，使用--enable-protocol=XXX；<br>
+不想支持这个协议，使用--disable-protocol=XXX<br>
+- 支持哪些比特流过滤器     ./configure --list-bsfs
+```
+aac_adtstoasc        filter_units         hevc_mp4toannexb     mpeg2_metadata       trace_headers
+chomp            h264_metadata        imx_dump_header      mpeg4_unpack_bframes     vp9_raw_reorder
+dca_core         h264_mp4toannexb     mjpeg2jpeg           noise            vp9_superframe
+dump_extradata       h264_redundant_pps   mjpega_dump_header       null             vp9_superframe_split
+eac3_core        hapqa_extract        mov2textsub          remove_extradata
+extract_extradata    hevc_metadata        mp3_header_decompress    text2movsub
+
+```
+想支持这个比特流过滤器，使用--enable-bsf=XXX；<br>
+不想支持这个比特流过滤器，使用--disable-bsf=XXX<br>
+- 支持哪些可用的输入设备   ./configure --list-indevs
+```
+alsa             dshow            kmsgrab          openal           vfwcap
+android_camera       fbdev            lavfi            oss              xcbgrab
+avfoundation         gdigrab          libcdio          pulse
+bktr             iec61883         libdc1394        sndio
+decklink         jack             libndi_newtek        v4l2
+
+```
+想支持这个输入设备，使用--enable-indev=XXX；<br>
+不想支持这个输入设备，使用--disable-indev=XXX<br>
+- 支持哪些可用的输出设备   ./configure --list-outdevs
+```
+alsa             fbdev            oss              sndio
+caca             libndi_newtek        pulse            v4l2
+decklink         opengl           sdl2             xv
+
+```
+想支持这个输出设备，使用--enable-outdev=XXX；<br>
+不想支持这个输出设备，使用--disable-outdev=XXX<br>
+- 支持哪些filter选项     ./configure --list-filters
+想支持这个filter选项，使用--enable-filter=XXX；<br>
+不想支持这个filter选项，使用--disable-filter=XXX<br>
+FFmpeg中原生的filter非常多，也提供了扩张框架可以保证接入新的filter，如果你有好的filter，可以接入进来，这是FFmpeg强大的生命力保证。<br><br><br>
+
+我们通过打开关闭这些编译选项，可以达到裁剪FFmpeg库的目的，要怎么裁剪，还要你根据实际情况来看，你的应用场景等等。
 ## 4.PC上编译以及运行FFmpeg
 ## 5.交叉编译FFmpeg
 ## 6.FFmpeg链接openssl/libx264/fdk-aac库
