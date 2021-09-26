@@ -120,7 +120,7 @@ jeffli@admindeMacBook-Pro resources % tree -L 3
 
 ## 4.检测例子
 我自己业余时间搞了一个音乐播放器，核心逻辑都在native层，有时候会发生一些native crash问题，指向性不明确，问题不好查，正好可以用一下Asan看看是否有效。<br>
-下面是我写的一个音频播放器。
+下面是我写的一个音频播放器。<br>
 ![音频播放器截图](./audioplayer/JeffAudioPlayer.jpg)<br>
 点击播放的时候发生了crash：
 ```
